@@ -1,11 +1,12 @@
 #include "sphere.hpp"
 #define _USE_MATH_DEFINES
-#include <cmath>
+#include <math.h>
 
 
 
-Sphere::Sphere(glm::vec3 center, float radius):
+Sphere::Sphere(glm::vec3 center, float radius,std::string name , Color color):
 
+    Shape(name,color),
     center_{center},
     radius_{radius}{}
 
