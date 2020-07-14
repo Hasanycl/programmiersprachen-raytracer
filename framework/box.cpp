@@ -24,3 +24,14 @@ float Box::volume() const {
 
     return l*h*w;
 }
+
+
+std::ostream& Box::print(std::ostream& os) const {
+
+    Shape::print(os);
+    os << "Min x: "<< min_.x << ", " << "Min y: "<<min_.y << ", " << "Min z: "<<min_.z << std::endl;
+    os << "Max x: "<< max_.x << ", " <<"Max y: " <<max_.y << ", " <<"Max z: "<<max_.z << std::endl;
+    os << "Area : "  <<  this->area() << std::endl;
+    os << "Volume : "<< this->volume() << std::endl;
+    return os;
+}

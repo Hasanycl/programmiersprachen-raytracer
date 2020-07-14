@@ -30,21 +30,7 @@ TEST_CASE("Sphere volume and area", "[area and volume]") {
 
 
 
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -66,5 +52,17 @@ TEST_CASE("Sphere volume and area", "[area and volume]") {
 
 int main(int argc, char *argv[])
 {
+
+    //idk if i should write these in a test case
+    Sphere s{ {3.0f, 2.0f , 4.0f}, 5.0f,"Sphere",{0.4f,0.5f,0.8f} };
+    Sphere s1{ {3.0f, 9.0f , 3.0f}, 6.4f,"Bored",{0.2f,0.2f,0.1f} };
+    Box b{ {4.0f , 2.0f ,2.0f},{7.0f, 8.0f , 9.0f},"whats in the Box",{0.4f,0.5f,0.8f} };
+    Box b1{ {3.0f , 2.0f ,1.0f},{7.0f, 8.0f , 9.0f},"Don Corleone",{0.2f,0.1f,0.8f } };
+    std::cout << s << "\n";
+    std::cout << s1 << "\n";
+    std::cout << b << "\n";
+    std::cout << b1 << "\n";
+
+
   return Catch::Session().run(argc, argv);
 }
