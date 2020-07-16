@@ -2,7 +2,10 @@
 #include <catch.hpp>
 #include"box.hpp"
 #include"sphere.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
+/*
 TEST_CASE("Box volume and area" , "[area and volume]"){
 
     Box b{ {3.0f, 4.0f, 3.0f},{4.0f, 6.0f, 5.0f},"Box",{0.1f,0.2f,0.4f} };
@@ -24,14 +27,39 @@ TEST_CASE("Sphere volume and area", "[area and volume]") {
     REQUIRE(s1.area() == Approx(181.45839f));
     REQUIRE(s1.volume() == Approx(229.84729f));
 
-
-
-
-
-
-
 }
 
+/*
+TEST_CASE(" intersect_ray_sphere ", "[intersect]"){
+    // Ray
+    glm::vec3 ray_origin{ 0.0f, 0.0f, 0.0f };
+        // ray direction has to be normalized !
+        // you can use :
+        // v = glm :: normalize ( some_vector )
+        glm::vec3 ray_direction{ 0.0f, 0.0f, 1.0f };
+    // Sphere
+    glm::vec3 sphere_center{ 0.0f ,0.0f, 5.0f };
+    float sphere_radius{ 1.0f };
+    float distance = 0.0f;
+    auto result = glm::intersectRaySphere(
+        ray_origin, ray_direction,
+        sphere_center,
+        sphere_radius * sphere_radius, // squared radius !!!
+        distance);
+    REQUIRE(distance == Approx(4.0f));
+}*/
+
+TEST_CASE() {
+
+    Color red{ 255 , 0 , 0 };
+    glm::vec3 position{ 0.0f, 0.0f, 0.0f };
+    Sphere* s1 = new Sphere{ position , 1.2f,  "sphere0", red };
+    Shape* s2 = new Sphere{ position , 1.2f, "sphere1" ,red  };
+    s1 -> print(std::cout) << "\n";
+    s2 -> print(std::cout) << "\n";
+    delete s1;
+    delete s2;
+}
 
 
 
@@ -52,7 +80,7 @@ TEST_CASE("Sphere volume and area", "[area and volume]") {
 
 int main(int argc, char *argv[])
 {
-
+    /*
     //idk if i should write these in a test case
     Sphere s{ {3.0f, 2.0f , 4.0f}, 5.0f,"Sphere",{0.4f,0.5f,0.8f} };
     Sphere s1{ {3.0f, 9.0f , 3.0f}, 6.4f,"Bored",{0.2f,0.2f,0.1f} };
@@ -62,7 +90,7 @@ int main(int argc, char *argv[])
     std::cout << s1 << "\n";
     std::cout << b << "\n";
     std::cout << b1 << "\n";
-
+    */
 
   return Catch::Session().run(argc, argv);
 }

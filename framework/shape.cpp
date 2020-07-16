@@ -3,7 +3,17 @@
 
 Shape::Shape(std::string name, Color color):
 	name_{name},
-	color_{ color }{}
+	color_{ color }{
+
+    std::cout << "Shape constructor called" << "\n";
+}
+
+
+
+Shape::~Shape() {
+
+    std::cout << "Shape destructor called" << "\n";
+}
 
 
 

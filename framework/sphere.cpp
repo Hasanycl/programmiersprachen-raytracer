@@ -8,8 +8,16 @@ Sphere::Sphere(glm::vec3 center, float radius,std::string name , Color color):
 
     Shape(name,color),
     center_{center},
-    radius_{radius}{}
+    radius_{radius}{
 
+    std::cout << "Sphere constructor called"<< "\n";
+}
+
+
+
+Sphere::~Sphere() {
+    std::cout << "Sphere destructor called" << "\n";
+}
 
 float Sphere::area() const {
 
