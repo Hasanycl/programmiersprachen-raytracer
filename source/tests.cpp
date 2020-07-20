@@ -4,6 +4,8 @@
 #include"sphere.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
+#include"ray.hpp"
+#include"hitpoint.hpp"
 
 /*
 TEST_CASE("Box volume and area" , "[area and volume]"){
@@ -28,8 +30,8 @@ TEST_CASE("Sphere volume and area", "[area and volume]") {
     REQUIRE(s1.volume() == Approx(229.84729f));
 
 }
+*/
 
-/*
 TEST_CASE(" intersect_ray_sphere ", "[intersect]"){
     // Ray
     glm::vec3 ray_origin{ 0.0f, 0.0f, 0.0f };
@@ -47,22 +49,52 @@ TEST_CASE(" intersect_ray_sphere ", "[intersect]"){
         sphere_radius * sphere_radius, // squared radius !!!
         distance);
     REQUIRE(distance == Approx(4.0f));
-}*/
+}
 
-TEST_CASE() {
+TEST_CASE(" intersect_ray_sphere2 ", "[intersect]") {
 
-    Color red{ 255 , 0 , 0 };
-    glm::vec3 position{ 0.0f, 0.0f, 0.0f };
-    Sphere* s1 = new Sphere{ position , 1.2f,  "sphere0", red };
-    Shape* s2 = new Sphere{ position , 1.2f, "sphere1" ,red  };
-    s1 -> print(std::cout) << "\n";
-    s2 -> print(std::cout) << "\n";
-    delete s1;
-    delete s2;
+    Sphere s{ {0.0f, 6.0f , 0.0f}, 1.0f, "Sphere" ,{0.1f,0.1f,0.2f} };
+    Ray ray{ {0.0f, 0.0f, 0.0f},{0.0f, 2.0f, 0.0f} };
+    HitPoint hit = s.intersect(ray);
+    REQUIRE(hit.intersected == true);
+    REQUIRE(hit.t == Approx(5.0f));
+    REQUIRE(hit.name == "Sphere");
+    REQUIRE(hit.color.r == 0.1f);
+    REQUIRE(hit.color.g == 0.1f);
+    REQUIRE(hit.color.b == 0.2f);
+
+
+
+
+    Sphere s1{ {5.0f, 1.0f , 0.0f}, 1.0f, "Sphere" ,{0.1f,0.1f,0.2f} };
+    Ray ray1{ {0.0f, 0.0f, 0.0f},{0.0f, 0.0f, 4.0f} };
+    HitPoint hit1 = s1.intersect(ray1);
+    REQUIRE(hit1.intersected == false);
+    REQUIRE(hit1.t == Approx(0.0f));
+
+
 }
 
 
 
+
+
+/*
+TEST_CASE() {
+    std::cout << "Task 5.8 ----------- - - - - - - - - - - - - - - - - - - - -" << "\n";
+    Color red{ 255 , 0 , 0 };
+    glm::vec3 position{ 0.0f, 0.0f, 0.0f };
+    Sphere* s1 = new Sphere{ position , 1.2f,  "sphere0", red };
+    Shape* s2 = new Sphere{ position , 1.2f, "sphere1" , red  };
+    s1 -> print(std::cout) << "\n";
+    s2 -> print(std::cout) << "\n";
+    delete s1;
+    delete s2;
+    std::cout << "Task 5.8 done ---------- - - - - - - - - - - - - - - - - - - -" << "\n";
+}
+
+
+*/
 
 
 

@@ -1,7 +1,8 @@
 #include "sphere.hpp"
 #define _USE_MATH_DEFINES
 #include <math.h>
-
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 
 Sphere::Sphere(glm::vec3 center, float radius,std::string name , Color color):
@@ -39,4 +40,14 @@ std::ostream& Sphere::print(std::ostream& os) const {
     os << "Area : " << this->area() << std::endl;
     os << "Volume : " << this->volume() << std::endl;
     return os;
+}
+
+
+
+HitPoint Sphere::intersect(Ray const& r) const {
+
+    float t = 0.0f;
+    auto ray_direction = glm::normalize(r.direction); //normalized direction
+    auto result = glm::intersectRaySphere(r.origin , ray_direction , center_ , std::pow(radius_, 2) , t);
+    return HitPoint{ result , t , name_ , color_ , r.origin + (t * ray_direction) , ray_direction };
 }
